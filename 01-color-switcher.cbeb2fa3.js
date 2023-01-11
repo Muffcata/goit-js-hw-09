@@ -1,2 +1,0 @@
-const t=document.querySelector('button[data-start="start"]'),e=document.querySelector('button[data-stop="stop"]'),o=document.querySelector("body");let r=null;t.addEventListener("click",(()=>{r=setInterval((()=>{let t=`#${Math.floor(16777215*Math.random()).toString(16)}`;o.style.background=t}),1e3)}));e.addEventListener("click",(()=>{clearInterval(r)}));
-//# sourceMappingURL=01-color-switcher.cbeb2fa3.js.map
