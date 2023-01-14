@@ -39,7 +39,7 @@ const countdown = () => {
     time -= 1000;
     if (time <= 300) {
       clearInterval(remainingTime);
-      Notiflix.Report.info('Time is up');
+      Notiflix.Report.success('End of time');
     } else {
       let remaining = convertMs(time);
       days.innerHTML = addLeadingZero(remaining.days);
