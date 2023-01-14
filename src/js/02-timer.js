@@ -1,5 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
 
 const flatpickr = require('flatpickr');
 const fp = document.querySelector('#datetime-picker')._flatpickr;
@@ -31,16 +32,14 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-const addLeadingZero = value => {
-  return (currentValue = value.toString().padStart(2, 0));
-};
 
 const countdown = () => {
   let time = choosenTime - currentDate;
-
   remainingTime = setInterval(() => {
-    if (time > choosenTime) {
+    time -= 1000;
+    if (time <= 300) {
       clearInterval(remainingTime);
+      Notiflix.Report.info('Time is up');
     } else {
       let remaining = convertMs(time);
       days.innerHTML = addLeadingZero(remaining.days);
@@ -51,6 +50,9 @@ const countdown = () => {
     }
   }, 1000);
 };
+const addLeadingZero = value => {
+  return (currentValue = value.toString().padStart(2, 0));
+};
 
 const options = {
   enableTime: true,
@@ -60,10 +62,9 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0].getTime() <= currentDate) {
       buttonStart.disabled = true;
-      window.alert('Please choose a date in the future');
+      Notiflix.Report.failure('Please choose a date in the future');
     } else {
       choosenTime = selectedDates[0].getTime();
-
       buttonStart.disabled = false;
     }
   },
