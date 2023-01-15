@@ -32,6 +32,21 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    if (selectedDates[0].getTime() <= currentDate) {
+      buttonStart.disabled = true;
+      Notiflix.Report.failure('Please choose a date in the future');
+    } else {
+      choosenTime = selectedDates[0].getTime();
+      buttonStart.disabled = false;
+    }
+  },
+};
 
 const countdown = () => {
   let time = choosenTime - currentDate;
@@ -52,22 +67,6 @@ const countdown = () => {
 };
 const addLeadingZero = value => {
   return (currentValue = value.toString().padStart(2, 0));
-};
-
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    if (selectedDates[0].getTime() <= currentDate) {
-      buttonStart.disabled = true;
-      Notiflix.Report.failure('Please choose a date in the future');
-    } else {
-      choosenTime = selectedDates[0].getTime();
-      buttonStart.disabled = false;
-    }
-  },
 };
 
 flatpickr = flatpickr(calendar, options); //adding flatpickr library//
