@@ -12,7 +12,7 @@ const minutes = document.querySelector('span[data-minutes]');
 const hours = document.querySelector('span[data-hours]');
 const days = document.querySelector('span[data-days]');
 let choosenTime = null;
-
+let remainingTime = null;
 // function to converting time
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -66,7 +66,7 @@ const countdown = () => {
   }, 1000);
 };
 const addLeadingZero = value => {
-  return (currentValue = value.toString().padStart(2, 0));
+  return value.toString().padStart(2, 0);
 };
 
 flatpickr(calendar, options); //adding flatpickr library//
