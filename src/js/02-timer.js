@@ -13,7 +13,7 @@ const hours = document.querySelector('span[data-hours]');
 const days = document.querySelector('span[data-days]');
 let choosenTime = null;
 
-// function to converting time
+// function to converting time--
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
