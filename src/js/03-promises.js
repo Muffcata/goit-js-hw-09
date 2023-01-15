@@ -36,12 +36,12 @@ const fetchUserFromServer = event => {
   for (let i = 1; i <= amount.value; i++) {
     position = i;
     createPromise(position, delayValue)
-      .then(({ position, delayValue }) => {
+      .then(value => ({ position, delayValue }) => {
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position - 1} in ${delayValue}ms`
         );
       })
-      .catch(({ position, delayValue }) => {
+      .catch(error => ({ position, delayValue }) => {
         Notiflix.Notify.failure(
           `❌ Rejected promise ${position - 1} in ${delayValue}ms`
         );
@@ -50,4 +50,5 @@ const fetchUserFromServer = event => {
   delayValue = +stepValue;
   position++;
 };
+
 feedback.addEventListener('submit', fetchUserFromServer);
