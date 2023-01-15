@@ -11,6 +11,7 @@ const seconds = document.querySelector('span[data-seconds]');
 const minutes = document.querySelector('span[data-minutes]');
 const hours = document.querySelector('span[data-hours]');
 const days = document.querySelector('span[data-days]');
+let choosenTime = null;
 
 // function to converting time
 function convertMs(ms) {
