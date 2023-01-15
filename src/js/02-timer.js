@@ -69,6 +69,6 @@ const options = {
   },
 };
 
-const fp = flatpickr(calendar, options);
+flatpickr = flatpickr(calendar, options);
 
 buttonStart.addEventListener('click', countdown);
