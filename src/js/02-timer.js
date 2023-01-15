@@ -2,8 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
-const flatpickr = require('flatpickr');
-const fp = document.querySelector('#datetime-picker')._flatpickr;
+const calendar = document.querySelector('#datetime-picker');
 const currentDate = new Date().getTime();
 const buttonStart = document.querySelector('button[data-start]');
 buttonStart.disabled = true;
@@ -70,6 +69,6 @@ const options = {
   },
 };
 
-flatpickr('#datetime-picker', options);
+const fp = flatpickr(calendar, options);
 
 buttonStart.addEventListener('click', countdown);
