@@ -37,7 +37,7 @@ const countdown = () => {
   let time = choosenTime - currentDate;
   remainingTime = setInterval(() => {
     time -= 1000;
-    if (time <= 300) {
+    if (time <= 0) {
       clearInterval(remainingTime);
       Notiflix.Report.success('End of time');
     } else {
