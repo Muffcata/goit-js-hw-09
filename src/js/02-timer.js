@@ -69,6 +69,6 @@ const addLeadingZero = value => {
   return (currentValue = value.toString().padStart(2, 0));
 };
 
-flatpickr = flatpickr(calendar, options); //adding flatpickr library//
+flatpickr(calendar, options); //adding flatpickr library//
 
 buttonStart.addEventListener('click', countdown);
