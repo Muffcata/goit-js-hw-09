@@ -5,29 +5,22 @@ const firstDelay = document.querySelector('input[name="delay"]');
 const delayStep = document.querySelector('input[name="step"]');
 const amount = document.querySelector('input[name="amount"]');
 
-let delayValue = firstDelay.valueAsNumber;
-let stepValue = delayStep.valueAsNumber;
 let position = 0;
 
 const fetchUserFromServer = event => {
   event.preventDefault();
+
+  let delayValue = firstDelay.valueAsNumber;
+  let stepValue = delayStep.valueAsNumber;
 
   function createPromise(position, delayValue) {
     return new Promise((resolve, reject) => {
       const shouldResolve = Math.random() > 0.3;
       setTimeout(() => {
         if (shouldResolve) {
-          resolve(
-            Notiflix.Notify.success(
-              `✅ Fulfilled promise ${position} in ${delayValue}ms`
-            )
-          );
+          resolve({ position, delayValue });
         } else {
-          reject(
-            Notiflix.Notify.failure(
-              `❌ Rejected promise ${position} in ${delayValue}ms`
-            )
-          );
+          reject({ position, delayValue });
         }
       }, delayValue);
     });
@@ -38,18 +31,23 @@ const fetchUserFromServer = event => {
     createPromise(position, delayValue)
       .then(value => {
         Notiflix.Notify.success(
-          `✅ Fulfilled promise ${position - 1} in ${delayValue}ms`
+          `✅ Fulfilled promise ${value.position} in ${value.delayValue}ms`
+        );
+        console.log(
+          `✅ Fulfilled promise ${value.position} in ${value.delayValue}ms`
         );
       })
       .catch(error => {
         Notiflix.Notify.failure(
-          `❌ Rejected promise ${position - 1} in ${delayValue}ms`
+          `❌ Rejected promise ${error.position} in ${error.delayValue}ms`
+        );
+        console.log(
+          `❌ Rejected promise ${error.position} in ${error.delayValue}ms`
         );
       });
 
-    delayValue = delayValue + stepValue;
+    delayValue += stepValue;
     position++;
   }
 };
-
 feedback.addEventListener('submit', fetchUserFromServer);
