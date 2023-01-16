@@ -3,16 +3,18 @@ import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
 const calendar = document.querySelector('#datetime-picker');
-const currentDate = new Date().getTime();
 const buttonStart = document.querySelector('button[data-start]');
-buttonStart.disabled = true;
-
 const seconds = document.querySelector('span[data-seconds]');
 const minutes = document.querySelector('span[data-minutes]');
 const hours = document.querySelector('span[data-hours]');
 const days = document.querySelector('span[data-days]');
+const buttonStop = document.querySelector('button[data-stop]');
+
+const currentDate = new Date().getTime();
+buttonStart.disabled = true;
 let choosenTime = null;
 let remainingTime = null;
+
 // function to converting time
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -48,12 +50,18 @@ const options = {
   },
 };
 
+const stopCountdown = () => {
+  clearInterval(remainingTime);
+  buttonStop.disabled = false;
+  buttonStart.disabled = false;
+};
 const countdown = () => {
   let time = choosenTime - currentDate;
   remainingTime = setInterval(() => {
     time -= 1000;
     if (time <= 0) {
-      clearInterval(remainingTime);
+      stopCountdown();
+
       Notiflix.Report.success('End of time');
     } else {
       let remaining = convertMs(time);
@@ -71,3 +79,4 @@ const addLeadingZero = value => {
 flatpickr(calendar, options); //adding flatpickr library
 
 buttonStart.addEventListener('click', countdown);
+buttonStop.addEventListener('click', stopCountdown);
