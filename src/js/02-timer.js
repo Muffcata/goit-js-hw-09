@@ -54,6 +54,10 @@ const stopCountdown = () => {
   clearInterval(remainingTime);
   buttonStop.disabled = false;
   buttonStart.disabled = false;
+  days.innerHTML = '00';
+  hours.innerHTML = '00';
+  minutes.innerHTML = '00';
+  seconds.innerHTML = '00';
 };
 const countdown = () => {
   let time = choosenTime - currentDate;
@@ -61,7 +65,6 @@ const countdown = () => {
     time -= 1000;
     if (time <= 0) {
       stopCountdown();
-
       Notiflix.Report.success('End of time');
     } else {
       let remaining = convertMs(time);
